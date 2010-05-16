@@ -8,6 +8,7 @@ Source0:	http://fancybox.googlecode.com/files/jquery.fancybox-%{version}.zip
 # Source0-md5:	d72d950a798ffaa83750dfd6e4a0e382
 URL:		http://www.fancybox.net/
 BuildRequires:	rpmbuild(macros) > 1.268
+BuildRequires:	unzip
 Requires:	jquery >= 1.3
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
