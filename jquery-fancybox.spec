@@ -1,5 +1,5 @@
 # TODO
-# - pkg for mousewheel
+# - pkg for optional mousewheel?
 %define		plugin	fancybox
 Summary:	Fancybox - Fancy lightbox alternative
 Name:		jquery-%{plugin}
@@ -80,14 +80,22 @@ install -d build
 # compress .js
 for js in fancybox/*.js; do
 	out=build/${js#*/jquery.}
+%if 0%{!?debug:1}
 	yuicompressor --charset UTF-8 $js -o $out
 	js -C -f $out
+%else
+	cp -a $js $out
+%endif
 done
 
 # pack .css
 for css in fancybox/*.css; do
 	out=build/${css#*/jquery.}
+%if 0%{!?debug:1}
 	yuicompressor --charset UTF-8 $css -o $out
+%else
+	cp -a $css $out
+%endif
 done
 
 cp -a fancybox/*.png build
