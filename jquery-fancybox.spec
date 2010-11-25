@@ -3,15 +3,16 @@
 %define		plugin	fancybox
 Summary:	Fancybox - Fancy lightbox alternative
 Name:		jquery-%{plugin}
-Version:	1.3.1
+Version:	1.3.4
 Release:	1
 License:	MIT / GPL v2
 Group:		Applications/WWW
 Source0:	http://fancybox.googlecode.com/files/jquery.fancybox-%{version}.zip
-# Source0-md5:	d72d950a798ffaa83750dfd6e4a0e382
+# Source0-md5:	f964f34f37237a33f62188cebbbb927a
 URL:		http://www.fancybox.net/
 BuildRequires:	rpmbuild(macros) >= 1.565
 BuildRequires:	unzip
+BuildRequires:	yuicompressor
 Requires:	jquery >= 1.3
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -44,7 +45,7 @@ Demonstrations and samples for jQuery.fancybox.
 %prep
 %setup -qn jquery.fancybox-%{version}
 
-%undos -f js,html,txt
+%undos -f js,css,html,txt
 
 mv fancybox/jquery.fancybox{-%{version},}.css
 mv fancybox/jquery.fancybox{-%{version}.pack,}.js
@@ -55,7 +56,7 @@ mv fancybox/jquery.fancybox-%{version}.js src/jquery.fancybox.js
 
 # deps - rename for now
 mv fancybox/jquery.easing{-1.3.pack,}.js # ? not used?
-mv fancybox/jquery.mousewheel{-3.0.2.pack,}.js
+mv fancybox/jquery.mousewheel{-3.0.4.pack,}.js
 # otherwise yuicompressor won't pack
 sed -i -e 's,^/\*!,/*,' fancybox/jquery.mousewheel.js
 
@@ -64,12 +65,13 @@ mv index.html style.css ajax.txt example demo
 ln -s %{_datadir}/jquery demo
 
 sed -i -e '
-	s,./fancybox/jquery.fancybox-1.3.1.js,jquery/fancybox/fancybox.js,
-	s,./fancybox/jquery.fancybox-1.3.1.css,jquery/fancybox/fancybox.css,
+	s,./fancybox/jquery.fancybox-%{version}.pack.js,jquery/fancybox/fancybox.js,
+	s,./fancybox/jquery.fancybox-%{version}.css,jquery/fancybox/fancybox.css,
 
-	s,http://code.jquery.com/jquery-1.4.2.min.js,jquery/jquery.js,
+	s,http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js,jquery/jquery.js,
+	s,jquery-1.4.3.min.js,jquery/jquery.js,
 
-	s,./fancybox/jquery.mousewheel-3.0.2.pack.js,jquery/fancybox/mousewheel.js,
+	s,./fancybox/jquery.mousewheel-3.0.4.pack.js,jquery/fancybox/mousewheel.js,
 
 	s,./example/,example/,g
 ' demo/index.html
