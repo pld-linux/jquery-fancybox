@@ -10,6 +10,7 @@ Group:		Applications/WWW
 Source0:	http://fancybox.googlecode.com/files/jquery.fancybox-%{version}.zip
 # Source0-md5:	f964f34f37237a33f62188cebbbb927a
 URL:		http://www.fancybox.net/
+BuildRequires:	js
 BuildRequires:	rpmbuild(macros) >= 1.565
 BuildRequires:	unzip
 BuildRequires:	yuicompressor
