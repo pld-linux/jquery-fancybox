@@ -4,12 +4,13 @@
 Summary:	Fancybox - Fancy lightbox alternative
 Name:		jquery-%{plugin}
 Version:	1.3.4
-Release:	1
+Release:	2
 License:	MIT / GPL v2
 Group:		Applications/WWW
 Source0:	http://fancybox.googlecode.com/files/jquery.fancybox-%{version}.zip
 # Source0-md5:	f964f34f37237a33f62188cebbbb927a
 URL:		http://www.fancybox.net/
+Patch0:		no-pngfix.patch
 BuildRequires:	js
 BuildRequires:	rpmbuild(macros) >= 1.565
 BuildRequires:	unzip
@@ -50,6 +51,8 @@ Demonstrations and samples for jQuery.fancybox.
 
 mv fancybox/jquery.fancybox{-%{version},}.css
 mv fancybox/jquery.fancybox{-%{version}.pack,}.js
+
+%patch0 -p0
 
 # source
 install -d demo src
